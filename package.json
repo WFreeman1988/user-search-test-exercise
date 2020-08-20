@@ -1,0 +1,23 @@
+{
+  "name": "npm",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test:system": "node bin/makeFile system --"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "auth0": "^2.27.1",
+    "chai": "^4.2.0",
+    "chalk": "^4.1.0",
+    "minimist": "^1.2.5",
+    "mocha": "^8.1.1",
+    "request-promise": "^4.2.6",
+    "shelljs": "^0.8.4"
+  },
+  "dependencies": {
+    "request": "^2.88.2"
+  }
+}

@@ -1,0 +1,34 @@
+[
+    {   
+        "email": "updateUser@gmail.com",
+        "user_metadata": {},
+        "blocked": false,
+        "email_verified": false,
+        "app_metadata": {},
+        "given_name": "Update",
+        "family_name": "User",
+        "name": "Update User",
+        "nickname": "Updater",
+        "picture": "https://secure.gravatar.com/avatar/15626c5e0c749cb912f9d1ad48dba440?s=480&r=pg&d=https%3A%2F%2Fssl.gstatic.com%2Fs2%2Fprofiles%2Fimages%2Fsilhouette80.png",
+        "user_id": "updateUser1",
+        "connection": "Username-Password-Authentication",
+        "password": "secret123!",
+        "verify_email": false
+    },
+    {   
+        "email": "updateUser2@gmail.com",
+        "user_metadata": {},
+        "blocked": false,
+        "email_verified": false,
+        "app_metadata": {},
+        "given_name": "Update2",
+        "family_name": "User",
+        "name": "Update2 User",
+        "nickname": "Updater2",
+        "picture": "https://secure.gravatar.com/avatar/15626c5e0c749cb912f9d1ad48dba440?s=480&r=pg&d=https%3A%2F%2Fssl.gstatic.com%2Fs2%2Fprofiles%2Fimages%2Fsilhouette80.png",
+        "user_id": "updateUser2",
+        "connection": "Username-Password-Authentication",
+        "password": "secret123!",
+        "verify_email": false
+    }
+]
