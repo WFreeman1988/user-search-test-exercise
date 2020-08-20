@@ -5,7 +5,7 @@ const chalk = require('chalk');
 const ManagementClient = require('auth0').ManagementClient;
 const testUserAccounts = require('../data/initialUserCreation.json');
 
-target.system = async (args) => {
+target.system = async args => {
     const argv = require('minimist')(args);
     console.log(chalk.green('Running system tests with the following arguments:'));
     for (key in argv) {
@@ -30,6 +30,7 @@ target.system = async (args) => {
         token: `${argv.token}`
     });
 
+    // Utilize promises here for performance gains when creating a larger dataset of users
     let promises = []
     for (idx in testUserAccounts) {
         const user = testUserAccounts[idx];
@@ -53,8 +54,10 @@ target.system = async (args) => {
 
     const tests = spawn(`"./node_modules/.bin/mocha" --recursive tests --domain ${argv.domain} --token ${argv.token}`, { stdio: 'inherit', shell: true });
 
-    tests.on('exit', async function (exitCode) {
+    tests.on('exit', async exitCode => {
+        console.log(chalk.green('Removing user accounts which were used for test purposes'));
         // Delete created user profiles before process exit
+        // Utilize promises here for performance gains when deleting a larger dataset of users
         promises = []
         for (idx in testUserAccounts) {
             const userId = 'auth0|' + testUserAccounts[idx].user_id;
