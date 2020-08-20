@@ -7,7 +7,7 @@ const testUserAccounts = require('../data/initialUserCreation.json');
 
 target.system = async (args) => {
     const argv = require('minimist')(args);
-    console.log(chalk.green('Running system tests witht he following arguments:'));
+    console.log(chalk.green('Running system tests with the following arguments:'));
     for (key in argv) {
         // Skip the _ key value returned by minimist
         if (key != '_') {

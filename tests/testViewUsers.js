@@ -16,7 +16,25 @@ const auth0 = new ManagementClient({
  */
 describe('Viewing User Search Results Via API', function () {
     it('Customer requests a list of users using "eventually consistent" search', function() {
-        return 'pending';
+        var options = {
+            method: 'GET',
+            url: `https://${argv.domain}/api/v2/users`,
+            qs: {q: 'nickname:"Johnny1"', search_engine: 'v3'},
+            headers: {authorization: `Bearer ${argv.token}`},
+            resolveWithFullResponse: true
+        };
+
+        return request(options)
+                .then( (response) => {
+                    console.log(`Nickname search status code: ${response.statusCode}`);
+                    console.log(`Nickname search body: ${response.body}`);
+                    chai.assert(response.statusCode == 200, "Status code returned from nickname search was not equal to 200");
+                    let bodyObj = JSON.parse(response.body);
+                    //chai.assert(bodyObj.name == updateUserInfo[0].name, "Name update was not reflected properly for user email search");
+                })
+                .catch( (err) => {
+                    throw err
+                });
     });
 
     it('Customer requests list of users using "eventually consistent" search and pages results', function() {
@@ -75,8 +93,6 @@ describe('Viewing User Search Results Via API', function () {
                 headers: {authorization: `Bearer ${argv.token}`},
                 resolveWithFullResponse: true
             };
-
-            console.log(`USER EMAIL: ${updateUserInfo[0].email}`);
 
             return request(options)
                 .then( (response) => {
