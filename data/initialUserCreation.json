@@ -346,5 +346,25 @@
         "connection": "Username-Password-Authentication",
         "password": "secret123!",
         "verify_email": false
+      },
+      {
+        "email": "joe.doe16@gmail.com",
+        "user_metadata": {},
+        "blocked": false,
+        "email_verified": true,
+        "app_metadata": {
+          "nestedObj": {
+            "test": "dontFindMe"
+          }
+        },
+        "given_name": "Joe",
+        "family_name": "Boe",
+        "name": "Joe Boe",
+        "nickname": "Joey",
+        "picture": "https://secure.gravatar.com/avatar/15626c5e0c749cb912f9d1ad48dba440?s=480&r=pg&d=https%3A%2F%2Fssl.gstatic.com%2Fs2%2Fprofiles%2Fimages%2Fsilhouette80.png",
+        "user_id": "abc17",
+        "connection": "Username-Password-Authentication",
+        "password": "secret123!",
+        "verify_email": false
       }
 ]
