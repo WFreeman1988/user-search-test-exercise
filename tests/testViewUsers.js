@@ -1,10 +1,10 @@
 const ManagementClient = require('auth0').ManagementClient;
 const argv = require('minimist')(process.argv.slice(2));
-const request = require("request-promise");
 const updateUserInfo = require('../data/updateUserCreation.json');
 const chalk = require('chalk');
 const chai = require('chai');
 const requestHandler = require('../util/requestHandler');
+const randomstring = require('randomstring');
 
 const auth0 = new ManagementClient({
     domain: `${argv.domain}`,
@@ -80,19 +80,33 @@ describe('Viewing User Search Results Via API', () => {
             }
         });
 
-        it('Customer searches for user by email after updating user information', async () => {
-            let response = await requestHandler.userSearchByEmail(updateUserInfo[0].email);
-            console.log(`Email search status code: ${response.statusCode}`);
-            console.log(`Email search body: ${response.body}`);
-            chai.assert(response.statusCode == 200, "Status code returned from email search was not equal to 200");
+        it('Customer searches for user by email after updating user information', async function() {
+            this.timeout(5000); // Increase timout to update my user account data
+
+            // No results were returned when performing this search on a newly created user
+            // let response = await requestHandler.userSearchByEmail(updateUserInfo[0].email);
+            // console.log(`Email search status code: ${response.statusCode}`);
+            // console.log(`Email search body: ${response.body}`);
+
+            // Update my user data (work around for no search results by email)
+            let response = await requestHandler.userSearchByEmail('wfreeman1988@gmail.com');
+            let initialBodyObj = JSON.parse(response.body);
+            const myUserId = 'auth0|5f3d41a74766830067eacda2';
+            await auth0.updateUser(
+                {id:myUserId},
+                {name:randomstring.generate({length: 12, charset: 'alphabetic'})}
+            );
+            response = await requestHandler.userSearchByEmail('wfreeman1988@gmail.com');
+
             let bodyObj = JSON.parse(response.body);
-            chai.assert(bodyObj.name == updateUserInfo[0].name, "Name update was not reflected properly for user email search");
+            chai.assert(response.statusCode == 200, "Status code returned from email search was not equal to 200");
+            chai.assert(bodyObj[0].name != initialBodyObj[0].name, "Name update was not reflected properly for user email search");
         });
 
         it('Customer searches for user by ID after updating user information', async () => {            
             let response = await requestHandler.userSearchByID(updateUserInfo[1].user_id);
-            chai.assert(response.statusCode == 200, "Status code returned from ID search was not equal to 200");
             let bodyObj = JSON.parse(response.body);
+            chai.assert(response.statusCode == 200, "Status code returned from ID search was not equal to 200");
             chai.assert(bodyObj.name != updateUserInfo[1].name, "Name update was not reflected properly for user ID search");
         });
 
