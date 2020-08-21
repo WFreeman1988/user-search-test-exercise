@@ -4,6 +4,7 @@ const request = require("request-promise");
 const updateUserInfo = require('../data/updateUserCreation.json');
 const chalk = require('chalk');
 const chai = require('chai');
+const requestHandler = require('../util/requestHandler');
 
 const auth0 = new ManagementClient({
     domain: `${argv.domain}`,
@@ -16,15 +17,12 @@ const auth0 = new ManagementClient({
  */
 describe('Viewing User Search Results Via API', () => {
     it('Customer requests a list of users using "eventually consistent" search', async () => {
-        let options = {
-            method: 'GET',
-            url: `https://${argv.domain}/api/v2/users`,
-            qs: {q: 'nickname:"Johnny1"', search_engine: 'v3'},
-            headers: {authorization: `Bearer ${argv.token}`},
-            resolveWithFullResponse: true
+        let query = {
+            q: 'nickname:"Johnny1"',
+            search_engine: 'v3'
         };
 
-        let response = await request(options);
+        let response = await requestHandler.userSearch(query);
         console.log(`Nickname search status code: ${response.statusCode}`);
         console.log(`Nickname search body: ${response.body}`);
         chai.assert(response.statusCode == 200, "Status code returned from nickname search was not equal to 200");
@@ -32,21 +30,15 @@ describe('Viewing User Search Results Via API', () => {
     });
 
     it('Customer requests list of users using "eventually consistent" search and pages results', async () => {
-        let options = {
-            method: 'GET',
-            url: `https://${argv.domain}/api/v2/users`,
-            qs: {
-                q: 'logins_count:[0 TO 5]',
-                page: '2',
-                per_page: '2',
-                include_totals: 'true',
-                search_engine: 'v3'
-            },
-            headers: {authorization: `Bearer ${argv.token}`},
-            resolveWithFullResponse: true
+        let query = {
+            q: 'logins_count:[0 TO 5]',
+            page: '2',
+            per_page: '2',
+            include_totals: 'true',
+            search_engine: 'v3'
         };
 
-        let response = await request(options);
+        let response = await requestHandler.userSearch(query);
         console.log(`Eventually consistent search status code: ${response.statusCode}`);
         console.log(`Eventually consistent search body: ${response.body}`);
         chai.assert(response.statusCode == 200, "Status code returned from 'eventually consistent' page search was not equal to 200");
@@ -57,6 +49,7 @@ describe('Viewing User Search Results Via API', () => {
         before(async function() {
             this.timeout(10000); // Increase timeout limits for user data creation
 
+            // Create & Update users for this set of tests
             for (idx in updateUserInfo) {
                 const user = updateUserInfo[idx];
                 try {
@@ -88,15 +81,7 @@ describe('Viewing User Search Results Via API', () => {
         });
 
         it('Customer searches for user by email after updating user information', async () => {
-            var options = {
-                method: 'GET',
-                url: `https://${argv.domain}/api/v2/users-by-email`,
-                qs: {email: updateUserInfo[0].email},
-                headers: {authorization: `Bearer ${argv.token}`},
-                resolveWithFullResponse: true
-            };
-
-            let response = await request(options);
+            let response = await requestHandler.userSearchByEmail(updateUserInfo[0].email);
             console.log(`Email search status code: ${response.statusCode}`);
             console.log(`Email search body: ${response.body}`);
             chai.assert(response.statusCode == 200, "Status code returned from email search was not equal to 200");
@@ -104,15 +89,8 @@ describe('Viewing User Search Results Via API', () => {
             chai.assert(bodyObj.name == updateUserInfo[0].name, "Name update was not reflected properly for user email search");
         });
 
-        it('Customer searches for user by ID after updating user information', async () => {
-            var options = {
-                method: 'GET',
-                url: `https://${argv.domain}/api/v2/users/auth0|${updateUserInfo[1].user_id}`,
-                headers: {authorization: `Bearer ${argv.token}`},
-                resolveWithFullResponse: true
-            };
-            
-            let response = await request(options);
+        it('Customer searches for user by ID after updating user information', async () => {            
+            let response = await requestHandler.userSearchByID(updateUserInfo[1].user_id);
             chai.assert(response.statusCode == 200, "Status code returned from ID search was not equal to 200");
             let bodyObj = JSON.parse(response.body);
             chai.assert(bodyObj.name != updateUserInfo[1].name, "Name update was not reflected properly for user ID search");
