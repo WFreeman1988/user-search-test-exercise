@@ -70,6 +70,7 @@ describe('Viewing "Immediately Consistent" User Search Results Via API', () => {
 
         let bodyObj = JSON.parse(response.body);
         chai.assert(response.statusCode == 200, "Status code returned from email search was not equal to 200");
+        chai.assert(bodyObj.length > 0, "No user search results were returned");
         chai.assert(bodyObj[0].name != initialBodyObj[0].name, "Name update was not reflected properly for user email search");
     });
 

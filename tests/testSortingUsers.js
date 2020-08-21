@@ -12,6 +12,7 @@ describe('Sorting User Search Results Via API', () => {
         let response = await userSearch(query);
         chai.assert(response.statusCode == 200, "Status code returned from login range count search was not equal to 200");
         let bodyObjArr = JSON.parse(response.body);
+        chai.assert(bodyObjArr.length > 0, "No user search results were returned");
         let prevEmailValue = bodyObjArr[0].email;
         for (let i = 1; i < bodyObjArr.length; i++) {
             let curEmailValue = bodyObjArr[i].email;
@@ -30,6 +31,7 @@ describe('Sorting User Search Results Via API', () => {
         let response = await userSearch(query);
         chai.assert(response.statusCode == 200, "Status code returned from login range count search was not equal to 200");
         let bodyObjArr = JSON.parse(response.body);
+        chai.assert(bodyObjArr.length > 0, "No user search results were returned");
         let prevEmailValue = bodyObjArr[0].email;
         for (let i = 1; i < bodyObjArr.length; i++) {
             let curEmailValue = bodyObjArr[i].email;
@@ -144,6 +146,7 @@ describe('Sorting User Search Results Via API', () => {
         let response = await userSearch(query);
         chai.assert(response.statusCode == 200, "Status code returned from login range count search was not equal to 200");
         let bodyObjArr = JSON.parse(response.body);
+        chai.assert(bodyObjArr.length > 0, "No user search results were returned");
         let prevEmailVerifiedValue = bodyObjArr[0].email_verified;
         for (let i = 1; i < bodyObjArr.length; i++) {
             let curEmailVerifiedValue = bodyObjArr[i].email_verified;
@@ -162,6 +165,7 @@ describe('Sorting User Search Results Via API', () => {
         let response = await userSearch(query);
         chai.assert(response.statusCode == 200, "Status code returned from login range count search was not equal to 200");
         let bodyObjArr = JSON.parse(response.body);
+        chai.assert(bodyObjArr.length > 0, "No user search results were returned");
         let prevEmailVerifiedValue = bodyObjArr[0].email_verified;
         for (let i = 1; i < bodyObjArr.length; i++) {
             let curEmailVerifiedValue = bodyObjArr[i].email_verified;

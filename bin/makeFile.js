@@ -58,7 +58,7 @@ target.system = async args => {
     // wait for the users to get created before starting testing
     await Promise.all(promises);
 
-    const tests = spawn(`"./node_modules/.bin/mocha" --recursive tests --domain ${argv.domain} --token ${argv.token}`, { stdio: 'inherit', shell: true });
+    const tests = spawn(`"./node_modules/.bin/mocha" --recursive ${testPath} --domain ${argv.domain} --token ${argv.token}`, { stdio: 'inherit', shell: true });
 
     tests.on('exit', async exitCode => {
         console.log(chalk.green('Removing user accounts which were used for test purposes'));

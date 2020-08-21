@@ -1,10 +1,26 @@
 [
     {   
         "email": "john.doe1@gmail.com",
-        "user_metadata": {},
+        "user_metadata": {
+          "nestedObjArray": [
+            {
+              "test": "searchMe"
+            },
+            {
+              "test": "searchMe2"
+            },
+            {
+              "test": "searchMe3"
+            }
+          ]
+        },
         "blocked": false,
         "email_verified": false,
-        "app_metadata": {},
+        "app_metadata": {
+          "nestedObj": {
+            "test": "findMe"
+          }
+        },
         "given_name": "John1",
         "family_name": "Doe",
         "name": "John1 Doe",
@@ -17,7 +33,19 @@
     },
     {
         "email": "john.doe2@gmail.com",
-        "user_metadata": {},
+        "user_metadata": {
+          "nestedObjArray": [
+            {
+              "test": "dontSearchMe"
+            },
+            {
+              "test": "dontSearchMe2"
+            },
+            {
+              "test": "dontSearchMe3"
+            }
+          ]
+        },
         "blocked": false,
         "email_verified": true,
         "app_metadata": {},
@@ -33,7 +61,19 @@
       },
       {
         "email": "john.doe3@gmail.com",
-        "user_metadata": {},
+        "user_metadata": {
+          "nestedObjArray": [
+            {
+              "test": "searchMe"
+            },
+            {
+              "test": "searchMe2"
+            },
+            {
+              "test": "searchMe3"
+            }
+          ]
+        },
         "blocked": false,
         "email_verified": false,
         "app_metadata": {},
@@ -49,7 +89,19 @@
       },
       {
         "email": "john.doe4@gmail.com",
-        "user_metadata": {},
+        "user_metadata": {
+          "nestedObjArray": [
+            {
+              "test": "searchMe"
+            },
+            {
+              "test": "searchMe2"
+            },
+            {
+              "test": "searchMe3"
+            }
+          ]
+        },
         "blocked": false,
         "email_verified": true,
         "app_metadata": {},
@@ -97,7 +149,19 @@
       },
       {
         "email": "john.doe7@gmail.com",
-        "user_metadata": {},
+        "user_metadata": {
+          "nestedObjArray": [
+            {
+              "test": "searchMe"
+            },
+            {
+              "test": "searchMe2"
+            },
+            {
+              "test": "searchMe3"
+            }
+          ]
+        },
         "blocked": false,
         "email_verified": false,
         "app_metadata": {},
@@ -129,7 +193,19 @@
       },
       {   
         "email": "john.doe9@gmail.com",
-        "user_metadata": {},
+        "user_metadata": {
+          "nestedObjArray": [
+            {
+              "test": "dontSearchMe"
+            },
+            {
+              "test": "dontSearchMe2"
+            },
+            {
+              "test": "dontSearchMe3"
+            }
+          ]
+        },
         "blocked": false,
         "email_verified": false,
         "app_metadata": {},
@@ -164,7 +240,11 @@
         "user_metadata": {},
         "blocked": false,
         "email_verified": false,
-        "app_metadata": {},
+        "app_metadata": {
+          "nestedObj": {
+            "test": "findMe"
+          }
+        },
         "given_name": "John11",
         "family_name": "Doe",
         "name": "John11 Doe",
@@ -196,7 +276,11 @@
         "user_metadata": {},
         "blocked": false,
         "email_verified": false,
-        "app_metadata": {},
+        "app_metadata": {
+          "nestedObj": {
+            "test": "findMe"
+          }
+        },
         "given_name": "John13",
         "family_name": "Doe",
         "name": "John13 Doe",
@@ -212,7 +296,11 @@
         "user_metadata": {},
         "blocked": false,
         "email_verified": true,
-        "app_metadata": {},
+        "app_metadata": {
+          "nestedObj": {
+            "test": "dontFindMe"
+          }
+        },
         "given_name": "John14",
         "family_name": "Doe",
         "name": "John14 Doe",
@@ -244,7 +332,11 @@
         "user_metadata": {},
         "blocked": false,
         "email_verified": true,
-        "app_metadata": {},
+        "app_metadata": {
+          "nestedObj": {
+            "test": "dontFindMe"
+          }
+        },
         "given_name": "John16",
         "family_name": "Doe",
         "name": "John16 Doe",
