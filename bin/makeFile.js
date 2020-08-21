@@ -2,6 +2,7 @@ require('shelljs/make');
 
 const spawn = require('child_process').spawn;
 const chalk = require('chalk');
+const path = require('path');
 const ManagementClient = require('auth0').ManagementClient;
 const testUserAccounts = require('../data/initialUserCreation.json');
 
@@ -22,6 +23,11 @@ target.system = async args => {
     if (!argv.token) {
         console.log(chalk.red('You must specify an auth0 API token with the --token argument'));
         process.exit(1);
+    }
+
+    let testPath = 'tests'
+    if (argv.testFile) {
+        testPath += path.sep + argv.testFile;
     }
 
     console.log(chalk.green('Setting up user accounts for test purposes'));
